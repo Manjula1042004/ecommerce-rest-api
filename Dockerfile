@@ -1,7 +1,7 @@
-openjdk:17-jdk-slim  
+FROM openjdk:17-slim
 WORKDIR /app
 COPY . .
-RUN chmod +x mvnw
-RUN ./mvnw clean package -DskipTests
+RUN apt-get update && apt-get install -y maven
+RUN mvn clean package -DskipTests
 EXPOSE 8080
 CMD ["java", "-jar", "target/ecommerce-api-*.jar"]
